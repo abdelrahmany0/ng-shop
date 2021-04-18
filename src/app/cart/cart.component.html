@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tbody>
+        <tr *ngFor="let item of cart">
+          <th scope="row">{{item.product}}</th>
+          <td>{{ item.price }}</td>
+          <td><input type="number" class="form-control mb-2 mr-sm-2" (input)="onInput($event)" value="{{ item.quantity}}">
+          </td>
+          <td>{{ item.total }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
