@@ -21,7 +21,7 @@
             </h3>
         </div>
 
-        <form class="w-75 m-auto" [formGroup]="quantity" (ngSubmit)="getFormData(quantity)" >
+        <form class="w-75 m-auto" [formGroup]="quantity" (ngSubmit)="onSubmit(quantity)" >
             <div class="form-group">
               <label >Quantity:</label>
               <input [class.is-invalid]="quantity.get('quantity_value').invalid == true && quantity.get('quantity_value').touched == true" type="number"  formControlName="quantity_value" class="form-control">

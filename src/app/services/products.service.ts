@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 })
 export class ProductsService {
   constructor(private _HttpClient:HttpClient) { }
-  getAllProducts():Observable<any>{
-    return this._HttpClient.get(`${environment.baseUrl}/products`);
+  getAllProducts(x?,l?):Observable<any>{
+    return this._HttpClient.get(`${environment.baseUrl}/products`, { params:{page:x,limit:l}});
   }
-
+ 
   getProductDetails(id):Observable<any>{
     return this._HttpClient.get(`${environment.baseUrl}/products/${id}`);
   }
