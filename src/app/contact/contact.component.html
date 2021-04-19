@@ -84,8 +84,8 @@
     <button
       class="btn btn-primary"
       [ngClass]="{
-        'btn-outline-success': contactForm.form.valid,
-        'btn-outline-default': contactForm.form.invalid
+        'btn-success': contactForm.form.valid,
+        'btn-secondary': contactForm.form.invalid
       }"
       type="submit"
       [disabled]="contactForm.form.invalid"
@@ -94,7 +94,7 @@
     </button>
   </form>
 
-  <div class="alert alert-success" role="alert" *ngIf="!isSent;">
+  <div class="alert alert-success mt-4" role="alert" *ngIf="!isSent;">
     Thank you for your feedback!
   </div>
   
