@@ -10,6 +10,7 @@ import {CartService} from '../services/cart.service';
 })
 export class CartComponent implements OnInit {
   cart: Cart[];
+  checkoutDone: boolean = false
   products: Array<any> = [
     {productId: '1', name: 'test', price: 50, quantity: 40},
     {productId: '2', name: 'test', price: 50, quantity: 3},
@@ -46,7 +47,7 @@ export class CartComponent implements OnInit {
 
   checkout(){
     this.cartService.updateCart([]);
-
+    this.checkoutDone = true
   }
 
   getTotalQuantity(){

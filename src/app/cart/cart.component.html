@@ -1,3 +1,7 @@
+<div class="alert alert-success" *ngIf="checkoutDone">
+  Thank You for purchasing using Ng Shop
+</div>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -39,7 +43,7 @@
       <div class="ml-5">{{ getTotalQuantity() }}</div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="cart.length">
     <div class="col-12">
       <button class="btn btn-primary btn-block" (click)="checkout()">Checkout</button>
     </div>
