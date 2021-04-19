@@ -3,46 +3,28 @@
    
 </div>
 <hr>
-<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+<form (ngSubmit)="onSubmit(contactForm)" [formGroup]="contactForm">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="name">Name*</label>
-        <input
-          type="text"
-          class="form-control"
-          name="name"
-          #nameRef="ngModel"
-          ngModel
-          required
-      
-        />
-  
+        <input formControlName="name" type="text" class="form-control"/>
         <div
-          class="alert alert-danger p-1 mt-1"
-          *ngIf="nameRef.dirty && nameRef?.errors?.required"
-        >
-          name is required.
-        </div>
+        class="alert alert-danger p-1 mt-1"
+        *ngIf="contactForm.get('name').touched && contactForm.get('name').invalid"
+      >
+        Invalid Name, min length: 2 characters.
+      </div>
   
-     
       </div>
   
       <div class="form-group col-md-6">
         <label for="title">Email*</label>
-        <input
-          type="email"
-          class="form-control"
-          name="email"
-          ngModel
-          #emailRef="ngModel"
-          required
-        />
-  
+        <input formControlName="email" type="email" class="form-control"/>
         <div
           class="alert alert-danger p-1 mt-1"
-          *ngIf="emailRef.dirty && emailRef.invalid"
+          *ngIf="contactForm.get('email').touched && contactForm.get('email').invalid"
         >
-          Email is required.
+          Invalid Email.
         </div>
       </div>
   
@@ -50,45 +32,34 @@
     </div>
     <div class="form-group">
         <label for="subject">Subject*</label>
-        <input
-          type="text"
-          class="form-control"
-          name="subject"
-          #subjectRef="ngModel"
-          ngModel
-          required
-      
-        />
-  
+        <input formControlName="subject" type="text" class="form-control"/>
         <div
-          class="alert alert-danger p-1 mt-1"
-          *ngIf="subjectRef.dirty && subjectRef?.errors?.required"
-        >
-          Subject is required.
-        </div>
+        class="alert alert-danger p-1 mt-1"
+        *ngIf="contactForm.get('subject').touched && contactForm.get('subject').invalid"
+      >
+        Invalid Subject, min length: 4 characters.
+      </div>
     </div>
-    
   <div class="form-group">
     <label for="message">Message*</label>
-    <textarea class="form-control rounded-0"  id="message" name="message"   #messageRef="ngModel" ngModel required
-      rows="3" ></textarea>
-
-      <div
-      class="alert alert-danger p-1 mt-1"
-      *ngIf="messageRef.dirty && messageRef?.errors?.required"
-    >
-      Message is required.
-    </div>
+    <textarea formControlName="message" class="form-control rounded-0" id="message" rows="3"></textarea>
+    
+  <div
+    class="alert alert-danger p-1 mt-1"
+    *ngIf="contactForm.get('message').touched && contactForm.get('message').invalid"
+  >
+    Invalid Message, min length: 4 characters.
+  </div>
   </div>
   
     <button
       class="btn btn-primary"
       [ngClass]="{
-        'btn-success': contactForm.form.valid,
-        'btn-secondary': contactForm.form.invalid
+        'btn-success': contactForm.valid,
+        'btn-secondary': contactForm.invalid
       }"
       type="submit"
-      [disabled]="contactForm.form.invalid"
+      [disabled]="contactForm.invalid"
     >
       Send Message
     </button>

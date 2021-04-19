@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContactService } from './services/contact.service';
 
@@ -18,6 +18,14 @@ export class ContactComponent implements OnInit {
     this.isSent = true;
   }
 
+  contactForm:FormGroup = new FormGroup(
+    {
+      "email": new FormControl("",[Validators.required,Validators.email]),
+      "name": new FormControl("",[Validators.required,Validators.minLength(2)]),
+      "subject": new FormControl("",[Validators.required,Validators.minLength(4)]),
+      "message": new FormControl("",[Validators.required,Validators.minLength(4)]),
+    }  
+  );
 
   onSubmit(form: FormGroup) {
     if (form.valid) {
