@@ -1,6 +1,6 @@
 <div class="row justify-content-center" >
   <div class="form-group w-50 mt-5">
-    <input [(ngModel)]="searchTerm"  placeholder="Search" type="text" class="form-control w-100 m-auto">
+    <input [(ngModel)]="searchTerm" (input)="getProducts()" placeholder="Search" type="text" class="form-control w-100 m-auto">
   </div>
   <div class="dropdown ml-2 mt-5">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -14,23 +14,23 @@
   </div>
 </div>
 <div class="row justify-content-center ">
-    <div *ngFor="let item of allProducts|search:searchTerm" class="card m-3 "  style="width: 18rem;">
+    <div *ngFor="let item of allProducts" class="card m-3 "  style="width: 18rem;">
         <div>
-          <a [routerLink]="['/product',item.ProductId]" routerLinkActive="router-link-active" class=""> 
+          <a [routerLink]="['/product',item.ProductId]" routerLinkActive="router-link-active" class="">
             <img [src]="item.ProductPicUrl" class="card-img-top w-100 border-bottom" alt="...">
           </a>
         </div>
-       
+
         <div class="card-body row justify-content-between align-items-center">
           <h5 class="card-title w-50">{{item.Name}}</h5>
           <p class="lead color text-danger">${{item.Price}}</p>
         </div>
         <button class="btn btn-secondary" [disabled]="isAdded" (click)="addToCart($event,item.ProductId)">Add To Cart</button>
-      
+
      </div>
 </div>
-<div class="text-center pt-3 pb-5"> 
+<div class="text-center pt-3 pb-5">
 
   <button class="btn btn-primary mx-2" (click)="prevPage()" [disabled]='current==1'> Prev</button>
-  <button class="btn btn-primary" (click)="nextPage()"[disabled]='current==numOfPages'>Next</button>
+  <button class="btn btn-primary" (click)="nextPage()" [disabled]='current==numOfPages'>Next</button>
 </div>
