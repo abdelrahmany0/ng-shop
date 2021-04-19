@@ -1,7 +1,8 @@
+import { CartComponent } from './cart/cart.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http'
-import{ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
+import{ ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,12 +16,12 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
+    CartComponent,
     HomeComponent,
     ItemComponent,
     NavbarComponent,
     ProductDetailsComponent,
     SearchPipe,
-
   ],
   imports: [
     BrowserModule,
@@ -32,4 +33,5 @@ import { FormsModule } from '@angular/forms';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
