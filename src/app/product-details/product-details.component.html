@@ -1,0 +1,33 @@
+<p>product-details works!</p>
+<div *ngIf="isLoaded" class="row">
+    <div class="col-md-4"> 
+        <img [src]="product.ProductPicUrl" class="w-100" alt="">
+    </div>
+    <div class="col-md-4 d-flex flex-column pt-5 mt-5"> 
+       <h4 class="text-primary">{{product.Category}}</h4>
+       <h6>{{product.Name}}</h6>
+       <p class="text-muted">
+        {{product.Description}}
+       </p>
+    </div>
+    <div class="col-md-3 px-4 border rounded">
+        <div class="pb-2 pt-5  border-bottom">
+            <span>Availability: </span> 
+            <span>{{product.Status}}</span> 
+        </div>
+        <div>
+            <h3 class="text-success mt-5">
+                ${{product.Price}}
+            </h3>
+        </div>
+
+        <form class="w-75 m-auto" [formGroup]="quantity" (ngSubmit)="onSubmit(quantity)" >
+            <div class="form-group">
+              <label >Quantity:</label>
+              <input [class.is-invalid]="quantity.get('quantity_value').invalid == true && quantity.get('quantity_value').touched == true" type="number"  formControlName="quantity_value" class="form-control">
+              <span *ngIf="quantity.get('quantity_value').invalid == true && quantity.get('quantity_value').touched == true"  class="text-danger">quantity_value is invalid</span>
+            </div>
+            <button type="submit" [disabled] ="quantity.invalid" class="btn btn-danger">Add TO cart</button>
+        </form>
+    </div>
+</div>

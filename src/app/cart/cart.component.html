@@ -1,0 +1,52 @@
+<div class="alert alert-success" *ngIf="checkoutDone">
+  Thank You for purchasing using Ng Shop
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tbody>
+        <tr *ngFor="let cartItem of cart">
+          <th scope="row">{{cartItem.product.name}}</th>
+          <td>{{ cartItem.product.price }}</td>
+          <td>
+            <input type="number"
+                   class="form-control mb-2 mr-sm-2"
+                   name="quantity" #quantity="ngModel"
+                   [(ngModel)]="cartItem.quantity"
+                   (input)="onInputQuantity(quantity, cartItem.product.quantity)"
+                   [class.is-invalid]="quantity.invalid"
+                   required>
+            <div *ngIf="quantity.errors?.required" class="invalid-feedback">{{quantity.errors.required}}</div>
+            <div *ngIf="quantity.errors?.maxMin" class="invalid-feedback">{{quantity.errors.maxMin}}</div>
+          </td>
+          <td>{{ cartItem.product.total }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12 d-flex flex-column align-items-end text-primary">
+      <h3 class="mr-5 text-dark"><span style="text-decoration: underline lightgreen wavy ">Cart </span>Total:</h3>
+    </div>
+    <div class="col-12 d-flex justify-content-end">
+      <div class="mr-5">Total:</div>
+      <div class="ml-5">{{ getTotalQuantity() }}</div>
+    </div>
+  </div>
+  <div class="row" *ngIf="cart.length">
+    <div class="col-12">
+      <button class="btn btn-primary btn-block" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
+</div>
+
