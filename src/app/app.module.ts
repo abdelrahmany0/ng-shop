@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ItemComponent } from './item/item.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { SearchPipe } from './search.pipe';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +22,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     ItemComponent,
     NavbarComponent,
+    ContactComponent,
+    AboutComponent,
     ProductDetailsComponent,
     SearchPipe,
   ],
