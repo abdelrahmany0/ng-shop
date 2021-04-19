@@ -1,6 +1,6 @@
-import { AddToCartService } from './../services/add-to-cart.service';
-import { ProductsService } from './../services/products.service';
+import { ProductsService } from '../services/products.service';
 import { Component, OnInit } from '@angular/core';
+import {CartService} from '../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   limit:number=10;
   isAdded:boolean = false;
   constructor(private _ProductsService:ProductsService,
-    private _AddToCartService:AddToCartService,
+    private cartService:CartService,
 
     ) { }
   ngOnInit(): void {
@@ -54,7 +54,12 @@ export class HomeComponent implements OnInit {
   }
 
   getProducts(){
-    this._ProductsService.getAllProducts(this.current,this.limit).subscribe((products:any)=>{
+    const params = {
+      limit: this.limit,
+      page: this.current,
+      ...(this.searchTerm && {q: this.searchTerm})
+    }
+    this._ProductsService.getAllProducts(params).subscribe((products:any)=>{
       this.allProducts=products.data;
       this.numOfPages = products.total_pages;
     });
@@ -62,11 +67,11 @@ export class HomeComponent implements OnInit {
   addToCart(e,id){
     this.productId= id ;
     this.product={
-      id:this.productId,
-      quantity_value:1
+      productId:this.productId,
+      quantity:1
     }
     this.selectedItems=this.product;
-    this._AddToCartService.saveSelectedProduct(this.selectedItems);
+    this.cartService.addToCart(this.selectedItems);
   }
 
   setLimit(l){

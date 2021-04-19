@@ -8,29 +8,33 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">Product</th>
-          <th scope="col">Price</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Total</th>
+          <th scope="col" class="text-center">Product</th>
+          <th scope="col" class="text-center">Price</th>
+          <th scope="col" class="text-center">Quantity</th>
+          <th scope="col" class="text-center">Total</th>
         </tr>
         </thead>
         <tbody>
         <tbody>
         <tr *ngFor="let cartItem of cart">
-          <th scope="row">{{cartItem.product.name}}</th>
-          <td>{{ cartItem.product.price }}</td>
-          <td>
+          <td class="text-center">
+            <img src="{{cartItem.product?.ProductPicUrl}}" alt="{{cartItem.product?.Name}}product." width="150px">
+            {{cartItem.product?.Name}}
+          </td>
+          <td class="text-center">{{ cartItem.product?.Price }}</td>
+          <td class="text-center">
             <input type="number"
                    class="form-control mb-2 mr-sm-2"
                    name="quantity" #quantity="ngModel"
                    [(ngModel)]="cartItem.quantity"
-                   (input)="onInputQuantity(quantity, cartItem.product.quantity)"
-                   [class.is-invalid]="quantity.invalid"
+                   (input)="onInputQuantity(quantity, cartItem.product?.Quantity)"
+                   max="{{cartItem.product?.Quantity}}"
+                   min="1"
                    required>
-            <div *ngIf="quantity.errors?.required" class="invalid-feedback">{{quantity.errors.required}}</div>
-            <div *ngIf="quantity.errors?.maxMin" class="invalid-feedback">{{quantity.errors.maxMin}}</div>
+            <div *ngIf="quantity.errors?.required" class="small text-danger">{{quantity.errors.required}}</div>
+            <div *ngIf="quantity.errors?.maxMin" class="small text-danger">{{quantity.errors.maxMin}}</div>
           </td>
-          <td>{{ cartItem.product.total }}</td>
+          <td class="text-center">{{ cartItem.total }}</td>
         </tr>
         </tbody>
       </table>
@@ -43,9 +47,9 @@
       <div class="ml-5">{{ getTotalQuantity() }}</div>
     </div>
   </div>
-  <div class="row" *ngIf="cart.length">
+  <div class="row" *ngIf="cart&&cart.length">
     <div class="col-12">
-      <button class="btn btn-primary btn-block" (click)="checkout()">Checkout</button>
+      <button class="btn btn-primary btn-block" (click)="checkout()" [disabled]="checkoutInvalid">Checkout</button>
     </div>
   </div>
 </div>

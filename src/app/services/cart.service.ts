@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {Cart} from '../models/cart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,18 @@ export class CartService {
   }
 
 
-  public addToCart(item): void {
-    let newCart = [...this.cart.getValue()];
+  public addToCart(item: Cart): void {
+    const newCart = [...this.cart.getValue()];
+    const cartItemIndex = newCart.findIndex((cartItem => cartItem.productId === item.productId));
+    if(cartItemIndex !== -1) {
+      newCart.splice(cartItemIndex, 1)
+    }
     newCart.push(item);
     this.cart.next(newCart);
     localStorage.cart = JSON.stringify(newCart);
   }
 
-  public updateCart(cart) {
+  public updateCart(cart: Cart[]) {
     this.cart.next(cart);
     localStorage.cart = JSON.stringify(cart);
   }
