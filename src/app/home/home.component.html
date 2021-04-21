@@ -1,5 +1,5 @@
 <a class="btn btn-warning stickyButton" href="/cart">
-  {{ cart.length }} ${{ totalPrice }} Checkout
+  {{ cart.length }} ${{ totalPrice | number:'1.0-0' }} Checkout
 </a>
 <div class="row justify-content-center" >
   <div class="form-group w-50 mt-5">
