@@ -1,3 +1,11 @@
 img {
   height: 250px;
 }
+
+.stickyButton{
+  float: right;
+  position: fixed;
+  z-index: 100;
+  right: 0;
+  top: 50%;
+}

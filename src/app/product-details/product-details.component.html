@@ -1,14 +1,13 @@
-<p>product-details works!</p>
 <div *ngIf="isLoaded" class="row">
     <div class="col-md-4">
         <img [src]="product.ProductPicUrl" class="w-100" alt="">
     </div>
     <div class="col-md-4 d-flex flex-column pt-5 mt-5">
-       <h4 class="text-primary">{{product.Category}}</h4>
-       <h6>{{product.Name}}</h6>
-       <p class="text-muted">
-        {{product.Description}}
-       </p>
+        <h4 class="text-primary">{{product.Category}}</h4>
+        <h6>{{product.Name}}</h6>
+        <p class="text-muted">
+            {{product.Description}}
+        </p>
     </div>
     <div class="col-md-3 px-4 border rounded">
         <div class="pb-2 pt-5  border-bottom">
@@ -23,11 +22,13 @@
 
         <form class="w-75 m-auto" [formGroup]="quantity" (ngSubmit)="onSubmit(quantity)" >
             <div class="form-group">
-              <label >Quantity:</label>
-              <input [class.is-invalid]="quantity.get('quantity').invalid == true && quantity.get('quantity').touched == true" type="number"  formControlName="quantity" class="form-control">
-              <span *ngIf="quantity.get('quantity').invalid == true && quantity.get('quantity').touched == true"  class="text-danger">quantity is invalid</span>
+                <label>Quantity:</label>
+                <input [class.is-invalid]="quantity.get('quantity').invalid == true && quantity.get('quantity').touched == true" type="number"  formControlName="quantity" class="form-control">
+                <span *ngIf="quantity.get('quantity').invalid == true && quantity.get('quantity').touched == true"  class="text-danger">quantity is invalid</span>
             </div>
-            <button type="submit" [disabled] ="quantity.invalid" class="btn btn-danger">Add TO cart</button>
+            <button type="submit" [disabled] ="quantity.invalid" class="btn btn-primary btn-block">{{ isInCart(product.ProductId) ? "Change quantity" : "Add to cart"   }}</button>
+        <button class="btn btn-danger mt-2 btn-block" *ngIf="isInCart(product.ProductId)" (click)="removeFromCart(product.ProductId)" >Remove from cart</button>
+            
         </form>
     </div>
 </div>

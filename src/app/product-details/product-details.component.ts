@@ -47,6 +47,15 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+
+  isInCart(itemId){
+    return this.cartService.findCartInstance(itemId);
+  }
+
+  removeFromCart(itemId){
+    this.cartService.removeCartInstance(itemId)
+  }
+  
   submittedForm(){
     this.quantity=this.fb.group ({
       productId:[this.product.ProductId],
